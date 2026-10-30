@@ -1,0 +1,1067 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gelingensnachweis Check 1: Kopfrechnen Add/Sub (KGS Bad Münder)</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@400;600;700;800;900&family=Fira+Code:wght@500;700&display=swap" rel="stylesheet">
+  
+  <style>
+    body {
+      font-family: 'Nunito', sans-serif;
+      font-size: 16px;
+      line-height: 1.5;
+      hyphens: none;
+      -webkit-hyphens: none;
+    }
+    .heading-font {
+      font-family: 'Fredoka', cursive, sans-serif;
+    }
+    .mono-font {
+      font-family: 'Fira Code', monospace;
+    }
+    /* Exaktes 36px Schulheft-Raster für Nebenrechnungen */
+    .math-grid {
+      background-size: 36px 36px !important;
+      background-image: 
+        linear-gradient(to right, #94a3b8 1.5px, transparent 1.5px),
+        linear-gradient(to bottom, #94a3b8 1.5px, transparent 1.5px) !important;
+      background-color: #ffffff !important;
+      border: 2px solid #64748b !important;
+      background-position: top left;
+      line-height: 36px;
+    }
+    /* Strikte Einzeiligkeit für ALLE Rechnungen */
+    .calc-row-single {
+      white-space: nowrap !important;
+      flex-wrap: nowrap !important;
+      display: inline-flex;
+      align-items: center;
+      flex-shrink: 0;
+    }
+    .input-cell {
+      height: 2.2rem;
+      text-align: center;
+      font-family: 'Fira Code', monospace;
+      font-weight: 700;
+      border: 1.5px solid #cbd5e1;
+      border-radius: 0.375rem;
+      outline: none;
+      transition: all 0.15s ease-in-out;
+      background-color: #ffffff;
+      color: #0f172a;
+    }
+    .input-cell:focus {
+      border-color: #e11d48;
+      box-shadow: 0 0 0 2px rgba(225, 29, 72, 0.25);
+    }
+    .input-cell-purple:focus {
+      border-color: #7c3aed;
+      box-shadow: 0 0 0 2px rgba(124, 58, 237, 0.25);
+    }
+    
+    /* Platzhalter strikt unsichtbar (Druck und Web) */
+    input::placeholder, textarea::placeholder {
+      opacity: 0 !important;
+      color: transparent !important;
+    }
+
+    @page {
+      size: A4 portrait;
+      margin: 12mm 15mm 12mm 15mm;
+    }
+    @media print {
+      html, body {
+        background: #ffffff !important;
+        color: #000000 !important;
+        font-size: 10.5pt !important;
+        line-height: 1.3 !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+      }
+      .no-print {
+        display: none !important;
+      }
+      .print-card {
+        box-shadow: none !important;
+        border: none !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        background: transparent !important;
+      }
+      .a4-page {
+        page-break-after: always;
+        break-after: page;
+        min-height: 268mm;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        box-sizing: border-box;
+      }
+      .a4-page:last-child {
+        page-break-after: avoid;
+        break-after: avoid;
+      }
+      .task-block {
+        break-inside: avoid !important;
+        page-break-inside: avoid !important;
+        border: 1.5px solid #cbd5e1 !important;
+        margin-bottom: 8px !important;
+        padding: 8px 12px !important;
+      }
+      input, textarea {
+        background-color: #ffffff !important;
+        background: #ffffff !important;
+        border: 1.5px solid #64748b !important;
+        color: #000000 !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+      }
+    }
+  </style>
+</head>
+<body class="bg-rose-50/30 text-slate-800 min-h-screen">
+
+  <!-- Header / Nav -->
+  <header class="no-print sticky top-0 z-50 bg-white/95 backdrop-blur border-b border-rose-200 shadow-sm py-2.5 px-4">
+    <div class="max-w-6xl mx-auto flex flex-wrap items-center justify-between gap-3">
+      
+      <div class="flex items-center gap-2.5">
+        <span class="text-3xl">➕</span>
+        <div>
+          <h1 class="font-bold text-slate-900 heading-font text-lg leading-tight flex items-center gap-2">
+            Gelingensnachweis: Check 1
+            <span class="text-xs bg-rose-100 text-rose-900 font-extrabold px-2 py-0.5 rounded-full border border-rose-300">
+              KGS Bad Münder • Jg. 5
+            </span>
+            <span class="text-[10px] bg-amber-100 text-amber-900 font-black px-2 py-0.5 rounded-full border border-amber-300">
+              🤖 KI-generiert
+            </span>
+          </h1>
+          <p class="text-xs text-slate-500 font-semibold">
+            Kopfrechnen Add/Sub & Rechengesetze • Zeit: <strong>30 Minuten</strong>
+          </p>
+        </div>
+      </div>
+
+      <div class="flex items-center bg-slate-50 px-3 py-1.5 rounded-xl border border-slate-300 gap-3">
+        <div class="text-right">
+          <div class="text-[10px] font-bold uppercase text-slate-500 tracking-wider">Verbleibende Zeit</div>
+          <div id="timer-display" class="text-xl font-black mono-font text-rose-700 tracking-wider">30:00</div>
+        </div>
+        <div class="flex items-center gap-1">
+          <button id="timer-toggle-btn" onclick="toggleTimer()" class="p-1.5 bg-rose-600 hover:bg-rose-700 text-white rounded-lg shadow-sm transition">
+            <svg id="timer-play-icon" class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path d="M4.5 3.5v13l11-6.5-11-6.5z"/></svg>
+            <svg id="timer-pause-icon" class="w-4 h-4 hidden" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M5 4h3v12H5V4zm7 0h3v12h-3V4z"/></svg>
+          </button>
+          <button onclick="resetTimer()" class="p-1.5 bg-slate-200 hover:bg-slate-300 text-slate-700 rounded-lg transition">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <div class="flex items-center flex-wrap gap-2 text-xs font-bold">
+        <button onclick="regenerateTasks()" class="flex items-center gap-1.5 bg-amber-500 hover:bg-amber-600 text-white px-3 py-2 rounded-xl shadow-sm transition">
+          <span>🎲</span> Neue Aufgaben würfeln
+        </button>
+        <button onclick="toggleSolutions()" id="btn-toggle-solutions" class="flex items-center gap-1.5 bg-sky-600 hover:bg-sky-700 text-white px-3 py-2 rounded-xl shadow-sm transition">
+          <span>👁️</span> Musterlösung
+        </button>
+        <button onclick="evaluateTest()" class="flex items-center gap-1.5 bg-emerald-600 hover:bg-emerald-700 text-white px-3.5 py-2 rounded-xl shadow-sm transition">
+          <span>✅</span> Jetzt auswerten
+        </button>
+        <button onclick="window.print()" class="flex items-center gap-1.5 bg-slate-800 hover:bg-slate-900 text-white px-3 py-2 rounded-xl shadow transition">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"></path></svg>
+          Drucken (A4)
+        </button>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- Modal -->
+  <div id="custom-modal" class="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/60 backdrop-blur-xs hidden p-4">
+    <div class="bg-white rounded-3xl p-6 max-w-md w-full shadow-2xl border-2 border-rose-300 transform transition-all text-center">
+      <div id="modal-icon" class="text-4xl mb-2">🎉</div>
+      <h3 id="modal-title" class="text-xl font-black text-slate-900 heading-font mb-2">Auswertung Check 1</h3>
+      <p id="modal-body" class="text-sm text-slate-600 leading-relaxed mb-5"></p>
+      <button onclick="closeModal()" class="w-full bg-rose-600 hover:bg-rose-700 text-white font-bold py-2.5 px-4 rounded-xl shadow transition">
+        Verstanden & Weiter
+      </button>
+    </div>
+  </div>
+
+  <main class="max-w-4xl mx-auto p-3 md:p-6">
+    <div class="print-card bg-white rounded-3xl p-6 md:p-10 shadow-lg border-2 border-rose-200">
+
+      <!-- ============================================================== -->
+      <!-- SEITE 1: ERWEITERTER STANDARD (KIRSCHE 🍒)                       -->
+      <!-- ============================================================== -->
+      <div class="a4-page">
+        <div>
+          <div class="border-b-2 border-rose-300 pb-2.5 mb-2.5">
+            <div class="flex justify-between items-start">
+              <div>
+                <div class="flex items-center gap-2 flex-wrap">
+                  <span class="inline-flex items-center gap-1.5 bg-rose-100 text-rose-900 text-xs font-black px-3 py-0.5 rounded-full uppercase tracking-wider border border-rose-300">
+                    KGS Bad Münder • Fachbereich Mathematik • Jahrgang 5
+                  </span>
+                  <span class="inline-flex items-center gap-1 bg-amber-100 text-amber-900 text-[10px] font-black px-2 py-0.5 rounded-full border border-amber-300">
+                    🤖 KI-generiert
+                  </span>
+                </div>
+                <h2 class="text-2xl md:text-3xl font-black text-slate-900 heading-font mt-1 tracking-tight">
+                  🎯 Check 1: Kopfrechnen Add/Sub, Rechengesetze
+                </h2>
+              </div>
+            </div>
+
+            <!-- Keine Platzhalter, Datum komplett offen -->
+            <div class="grid grid-cols-3 gap-3 mt-2.5 bg-rose-50/70 p-2.5 rounded-xl border-2 border-rose-200 text-xs font-bold text-slate-700">
+              <div>
+                <label class="block text-[10px] uppercase text-slate-500 font-extrabold">Name:</label>
+                <input type="text" id="student-name" autocomplete="off" class="w-full bg-white border border-slate-300 rounded-lg px-2 py-1 text-slate-800 font-bold focus:border-rose-500 outline-none">
+              </div>
+              <div>
+                <label class="block text-[10px] uppercase text-slate-500 font-extrabold">Klasse:</label>
+                <div class="flex items-center gap-1">
+                  <span class="text-sm font-bold">5</span>
+                  <input type="text" id="student-class" autocomplete="off" class="w-16 bg-white border border-slate-300 rounded-lg px-2 py-1 text-slate-800 font-bold focus:border-rose-500 outline-none">
+                </div>
+              </div>
+              <div>
+                <label class="block text-[10px] uppercase text-slate-500 font-extrabold">Datum:</label>
+                <input type="text" id="test-date" autocomplete="off" class="w-full bg-white border border-slate-300 rounded-lg px-2 py-1 text-slate-800 font-bold focus:border-rose-500 outline-none">
+              </div>
+            </div>
+
+            <!-- Niveaustufen exakt nach Vorgabe -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5 mt-2.5 text-xs font-bold text-center">
+              <div class="bg-rose-50 text-rose-950 p-2 rounded-xl border-2 border-rose-400 flex items-center justify-center gap-2 shadow-xs ring-2 ring-rose-200">
+                <span class="inline-flex items-center gap-1.5 bg-white px-2 py-1 rounded-lg border-2 border-rose-400 shadow-xs shrink-0">
+                  <img src="3%20Kirsche.png" alt="Kirsche" class="w-7 h-7 shrink-0 object-contain drop-shadow-xs">
+                  <span class="text-rose-700 font-black text-xs uppercase tracking-wide">Erweiterter Standard</span>
+                </span>
+                <span class="text-amber-500 font-black shrink-0">⭐⭐⭐</span>
+                <span class="leading-tight text-left">
+                  <strong class="block">Teil 1</strong>
+                  <span class="text-[11px] font-semibold text-rose-800">20 Punkte (Aufg. 1 bis 6)</span>
+                </span>
+              </div>
+              <div class="bg-purple-50 text-purple-950 p-2 rounded-xl border-2 border-purple-400 flex items-center justify-center gap-2 shadow-xs ring-2 ring-purple-200">
+                <span class="inline-flex items-center gap-1.5 bg-white px-2 py-1 rounded-lg border-2 border-purple-400 shadow-xs shrink-0">
+                  <img src="4%20Brombeere.png" alt="Brombeere" class="w-7 h-7 shrink-0 object-contain drop-shadow-xs">
+                  <span class="text-purple-700 font-black text-xs uppercase tracking-wide">Experten-<br>standard</span>
+                </span>
+                <span class="text-amber-500 font-black shrink-0">⭐⭐⭐⭐</span>
+                <span class="leading-tight text-left">
+                  <strong class="block">Teil 2</strong>
+                  <span class="text-[11px] font-semibold text-purple-800">9 Punkte (Aufg. 7 bis 9)</span>
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <section class="mb-2">
+            <div class="flex items-center gap-2.5 mb-2 bg-rose-50 border-l-4 border-rose-500 p-2 rounded-r-xl border border-rose-200">
+              <span class="inline-flex items-center gap-1.5 bg-white px-2 py-0.5 rounded-lg border border-rose-300 shadow-xs">
+                <img src="3%20Kirsche.png" alt="Kirsche" class="w-5 h-5 shrink-0 object-contain">
+                <span class="text-xs font-black text-rose-800">Erweiterter Standard</span>
+              </span>
+              <span class="text-sm font-bold text-amber-500">⭐⭐⭐</span>
+            </div>
+
+            <!-- Aufgabe 1: Fachbegriffe -->
+            <div class="task-block mb-2.5 p-3 rounded-2xl bg-white border-2 border-slate-200 shadow-xs">
+              <div class="flex justify-between items-center mb-1.5">
+                <h4 class="font-black text-slate-900 text-sm flex items-center gap-2">
+                  <span class="bg-rose-500 text-white w-5 h-5 rounded-full inline-flex items-center justify-center text-[10px] font-black shrink-0">1</span>
+                  Löse die Aufgabe und schreibe das Ergebnis in das Feld.
+                </h4>
+                <span class="text-xs font-black text-slate-700 bg-slate-100 border border-slate-300 px-2 py-0.5 rounded-lg shrink-0">___ / 4 P.</span>
+              </div>
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-2 text-xs md:text-sm font-medium text-slate-800">
+                <div class="bg-slate-50 p-2 rounded-xl border border-slate-200 flex flex-col justify-between">
+                  <span id="t1-txt1" class="mb-2 font-bold"></span>
+                  <div class="calc-row-single gap-2 mt-auto w-full">
+                    <input type="text" id="t1-eq1-input" autocomplete="off" class="input-cell flex-1 min-w-[80px] shrink-0 h-10 px-2 text-base">
+                    <span class="font-bold text-lg shrink-0">=</span>
+                    <input type="number" id="t1-ans1" autocomplete="off" class="input-cell w-20 shrink-0 h-10 text-base">
+                    <span class="solution-hint hidden text-[10px] font-bold text-emerald-700 ml-1 shrink-0" id="sol-t1-1"></span>
+                  </div>
+                </div>
+                <div class="bg-slate-50 p-2 rounded-xl border border-slate-200 flex flex-col justify-between">
+                  <span id="t1-txt2" class="mb-2 font-bold"></span>
+                  <div class="calc-row-single gap-2 mt-auto w-full">
+                    <input type="text" id="t1-eq2-input" autocomplete="off" class="input-cell flex-1 min-w-[80px] shrink-0 h-10 px-2 text-base">
+                    <span class="font-bold text-lg shrink-0">=</span>
+                    <input type="number" id="t1-ans2" autocomplete="off" class="input-cell w-20 shrink-0 h-10 text-base">
+                    <span class="solution-hint hidden text-[10px] font-bold text-emerald-700 ml-1 shrink-0" id="sol-t1-2"></span>
+                  </div>
+                </div>
+                <div class="bg-slate-50 p-2 rounded-xl border border-slate-200 flex flex-col justify-between">
+                  <span id="t1-txt3" class="mb-2 font-bold"></span>
+                  <div class="calc-row-single gap-2 mt-auto w-full">
+                    <input type="text" id="t1-eq3-input" autocomplete="off" class="input-cell flex-1 min-w-[80px] shrink-0 h-10 px-2 text-base">
+                    <span class="font-bold text-lg shrink-0">=</span>
+                    <input type="number" id="t1-ans3" autocomplete="off" class="input-cell w-20 shrink-0 h-10 text-base">
+                    <span class="solution-hint hidden text-[10px] font-bold text-emerald-700 ml-1 shrink-0" id="sol-t1-3"></span>
+                  </div>
+                </div>
+                <div class="bg-slate-50 p-2 rounded-xl border border-slate-200 flex flex-col justify-between">
+                  <span id="t1-txt4" class="mb-2 font-bold"></span>
+                  <div class="calc-row-single gap-2 mt-auto w-full">
+                    <input type="text" id="t1-eq4-input" autocomplete="off" class="input-cell flex-1 min-w-[80px] shrink-0 h-10 px-2 text-base">
+                    <span class="font-bold text-lg shrink-0">=</span>
+                    <input type="number" id="t1-ans4" autocomplete="off" class="input-cell w-20 shrink-0 h-10 text-base">
+                    <span class="solution-hint hidden text-[10px] font-bold text-emerald-700 ml-1 shrink-0" id="sol-t1-4"></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Aufgabe 2: Kopfrechnen Add/Sub Ketten -->
+            <div class="task-block mb-2.5 p-3 rounded-2xl bg-white border-2 border-slate-200 shadow-xs">
+              <div class="flex justify-between items-center mb-1.5">
+                <h4 class="font-black text-slate-900 text-sm flex items-center gap-2">
+                  <span class="bg-rose-500 text-white w-5 h-5 rounded-full inline-flex items-center justify-center text-[10px] font-black shrink-0">2</span>
+                  Berechne die Aufgaben.
+                </h4>
+                <span class="text-xs font-black text-slate-700 bg-slate-100 border border-slate-300 px-2 py-0.5 rounded-lg shrink-0">___ / 4 P.</span>
+              </div>
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-2 text-sm mono-font font-bold">
+                <div class="calc-row-single justify-between bg-slate-50 p-2 rounded-xl border border-slate-200 w-full overflow-x-auto">
+                  <span id="t2-eq1" class="shrink-0 text-slate-900"></span>
+                  <div class="calc-row-single gap-1 shrink-0"><input type="number" id="t2-ans1" autocomplete="off" class="input-cell w-20 shrink-0"><span class="solution-hint hidden text-[10px] font-bold text-emerald-700 ml-1 shrink-0" id="sol-t2-1"></span></div>
+                </div>
+                <div class="calc-row-single justify-between bg-slate-50 p-2 rounded-xl border border-slate-200 w-full overflow-x-auto">
+                  <span id="t2-eq2" class="shrink-0 text-slate-900"></span>
+                  <div class="calc-row-single gap-1 shrink-0"><input type="number" id="t2-ans2" autocomplete="off" class="input-cell w-20 shrink-0"><span class="solution-hint hidden text-[10px] font-bold text-emerald-700 ml-1 shrink-0" id="sol-t2-2"></span></div>
+                </div>
+                <div class="calc-row-single justify-between bg-slate-50 p-2 rounded-xl border border-slate-200 w-full overflow-x-auto">
+                  <span id="t2-eq3" class="shrink-0 text-slate-900"></span>
+                  <div class="calc-row-single gap-1 shrink-0"><input type="number" id="t2-ans3" autocomplete="off" class="input-cell w-20 shrink-0"><span class="solution-hint hidden text-[10px] font-bold text-emerald-700 ml-1 shrink-0" id="sol-t2-3"></span></div>
+                </div>
+                <div class="calc-row-single justify-between bg-slate-50 p-2 rounded-xl border border-slate-200 w-full overflow-x-auto">
+                  <span id="t2-eq4" class="shrink-0 text-slate-900"></span>
+                  <div class="calc-row-single gap-1 shrink-0"><input type="number" id="t2-ans4" autocomplete="off" class="input-cell w-20 shrink-0"><span class="solution-hint hidden text-[10px] font-bold text-emerald-700 ml-1 shrink-0" id="sol-t2-4"></span></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Aufgabe 3: Klammern beachten -->
+            <div class="task-block mb-2.5 p-3 rounded-2xl bg-white border-2 border-slate-200 shadow-xs">
+              <div class="flex justify-between items-center mb-1.5">
+                <h4 class="font-black text-slate-900 text-sm flex items-center gap-2">
+                  <span class="bg-rose-500 text-white w-5 h-5 rounded-full inline-flex items-center justify-center text-[10px] font-black shrink-0">3</span>
+                  Berechne die Aufgaben. Beachte die Rechengesetze (Klammern).
+                </h4>
+                <span class="text-xs font-black text-slate-700 bg-slate-100 border border-slate-300 px-2 py-0.5 rounded-lg shrink-0">___ / 4 P.</span>
+              </div>
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-2 text-sm mono-font font-bold">
+                <div class="calc-row-single justify-between bg-slate-50 p-2 rounded-xl border border-slate-200 w-full overflow-x-auto">
+                  <span id="t3-eq1" class="shrink-0 text-slate-900"></span>
+                  <div class="calc-row-single gap-1 shrink-0"><input type="number" id="t3-ans1" autocomplete="off" class="input-cell w-20 shrink-0"><span class="solution-hint hidden text-[10px] font-bold text-emerald-700 ml-1 shrink-0" id="sol-t3-1"></span></div>
+                </div>
+                <div class="calc-row-single justify-between bg-slate-50 p-2 rounded-xl border border-slate-200 w-full overflow-x-auto">
+                  <span id="t3-eq2" class="shrink-0 text-slate-900"></span>
+                  <div class="calc-row-single gap-1 shrink-0"><input type="number" id="t3-ans2" autocomplete="off" class="input-cell w-20 shrink-0"><span class="solution-hint hidden text-[10px] font-bold text-emerald-700 ml-1 shrink-0" id="sol-t3-2"></span></div>
+                </div>
+                <div class="calc-row-single justify-between bg-slate-50 p-2 rounded-xl border border-slate-200 w-full overflow-x-auto">
+                  <span id="t3-eq3" class="shrink-0 text-slate-900"></span>
+                  <div class="calc-row-single gap-1 shrink-0"><input type="number" id="t3-ans3" autocomplete="off" class="input-cell w-20 shrink-0"><span class="solution-hint hidden text-[10px] font-bold text-emerald-700 ml-1 shrink-0" id="sol-t3-3"></span></div>
+                </div>
+                <div class="calc-row-single justify-between bg-slate-50 p-2 rounded-xl border border-slate-200 w-full overflow-x-auto">
+                  <span id="t3-eq4" class="shrink-0 text-slate-900"></span>
+                  <div class="calc-row-single gap-1 shrink-0"><input type="number" id="t3-ans4" autocomplete="off" class="input-cell w-20 shrink-0"><span class="solution-hint hidden text-[10px] font-bold text-emerald-700 ml-1 shrink-0" id="sol-t3-4"></span></div>
+                </div>
+              </div>
+            </div>
+
+          </section>
+        </div>
+        <div class="pt-2 border-t border-slate-200 flex justify-between items-center text-[10px] text-slate-400 font-bold">
+          <span>KGS Bad Münder • Mathematik 5 • 🤖 KI-generiert</span>
+          <span class="bg-slate-100 px-2 py-0.5 rounded-md text-slate-600">Seite 1 von 3</span>
+        </div>
+      </div>
+
+      <!-- ============================================================== -->
+      <!-- SEITE 2: ERWEITERTER STANDARD FORTS.                             -->
+      <!-- ============================================================== -->
+      <div class="a4-page mt-6">
+        <div>
+          <div class="flex justify-between items-center border-b-2 border-rose-300 pb-1.5 mb-2.5">
+            <span class="text-xs font-black text-rose-950 heading-font">Check 1 • Seite 2 • Erweiterter Standard 🤖</span>
+            <span class="text-xs text-slate-700 font-bold">Name: <span class="header-name-mirror">______________________</span></span>
+          </div>
+
+          <section class="mb-2">
+            <!-- Aufgabe 4: Klammern setzen -->
+            <div class="task-block mb-2.5 p-3 rounded-2xl bg-white border-2 border-slate-200 shadow-xs">
+              <div class="flex justify-between items-center mb-1.5">
+                <h4 class="font-black text-slate-900 text-sm flex items-center gap-2">
+                  <span class="bg-rose-500 text-white w-5 h-5 rounded-full inline-flex items-center justify-center text-[10px] font-black shrink-0">4</span>
+                  Setze selbst Klammern, sodass das Ergebnis richtig ist.
+                </h4>
+                <span class="text-xs font-black text-slate-700 bg-slate-100 border border-slate-300 px-2 py-0.5 rounded-lg shrink-0">___ / 2 P.</span>
+              </div>
+              <p class="text-xs text-slate-600 mb-2">Tippe die Aufgabe mitsamt den fehlenden Klammern ab.</p>
+              <div class="grid grid-cols-1 gap-2 text-sm mono-font font-bold">
+                <div class="bg-rose-50/50 p-2 rounded-xl border border-rose-200">
+                  <div class="mb-1 text-rose-950" id="t4-eq1"></div>
+                  <div class="calc-row-single gap-1 w-full overflow-x-auto">
+                    <span class="text-xs text-slate-500 shrink-0 mr-1">Lösung:</span>
+                    <input type="text" id="t4-ans1" autocomplete="off" class="input-cell flex-1 min-w-[200px] px-2 text-left shrink-0">
+                  </div>
+                  <span class="solution-hint hidden text-[10px] font-bold text-emerald-700 block mt-1" id="sol-t4-1"></span>
+                </div>
+                <div class="bg-rose-50/50 p-2 rounded-xl border border-rose-200">
+                  <div class="mb-1 text-rose-950" id="t4-eq2"></div>
+                  <div class="calc-row-single gap-1 w-full overflow-x-auto">
+                    <span class="text-xs text-slate-500 shrink-0 mr-1">Lösung:</span>
+                    <input type="text" id="t4-ans2" autocomplete="off" class="input-cell flex-1 min-w-[200px] px-2 text-left shrink-0">
+                  </div>
+                  <span class="solution-hint hidden text-[10px] font-bold text-emerald-700 block mt-1" id="sol-t4-2"></span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Aufgabe 5: Vorteilhafte Rechnen -->
+            <div class="task-block mb-2.5 p-3 rounded-2xl bg-white border-2 border-slate-200 shadow-xs">
+              <div class="flex justify-between items-center mb-1.5">
+                <h4 class="font-black text-slate-900 text-sm flex items-center gap-2">
+                  <span class="bg-rose-500 text-white w-5 h-5 rounded-full inline-flex items-center justify-center text-[10px] font-black shrink-0">5</span>
+                  Rechne vorteilhaft. Notiere auch Zwischenschritte.
+                </h4>
+                <span class="text-xs font-black text-slate-700 bg-slate-100 border border-slate-300 px-2 py-0.5 rounded-lg shrink-0">___ / 2 P.</span>
+              </div>
+              <div class="grid grid-cols-1 gap-2 text-sm mono-font font-bold">
+                <div class="calc-row-single justify-between bg-slate-50 p-2 rounded-xl border border-slate-200 w-full overflow-x-auto">
+                  <span id="t5-eq1" class="shrink-0 text-slate-900"></span>
+                  <div class="calc-row-single gap-1 shrink-0">
+                    <span class="font-bold text-slate-400 shrink-0">=</span>
+                    <input type="text" id="t5-step1" autocomplete="off" class="input-cell w-32 shrink-0 px-1 placeholder-transparent">
+                    <span class="font-bold text-slate-400 shrink-0">=</span>
+                    <input type="number" id="t5-ans1" autocomplete="off" class="input-cell w-20 shrink-0">
+                    <span class="solution-hint hidden text-[10px] font-bold text-emerald-700 ml-1 shrink-0" id="sol-t5-1"></span>
+                  </div>
+                </div>
+                <div class="calc-row-single justify-between bg-slate-50 p-2 rounded-xl border border-slate-200 w-full overflow-x-auto">
+                  <span id="t5-eq2" class="shrink-0 text-slate-900"></span>
+                  <div class="calc-row-single gap-1 shrink-0">
+                    <span class="font-bold text-slate-400 shrink-0">=</span>
+                    <input type="text" id="t5-step2" autocomplete="off" class="input-cell w-40 shrink-0 px-1 placeholder-transparent">
+                    <span class="font-bold text-slate-400 shrink-0">=</span>
+                    <input type="number" id="t5-ans2" autocomplete="off" class="input-cell w-24 shrink-0">
+                    <span class="solution-hint hidden text-[10px] font-bold text-emerald-700 ml-1 shrink-0" id="sol-t5-2"></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Aufgabe 6: Sachaufgabe -->
+            <div class="task-block mb-2 p-3 rounded-2xl bg-white border-2 border-slate-200 shadow-xs flex flex-col">
+              <div class="flex justify-between items-center mb-1.5">
+                <h4 class="font-black text-slate-900 text-sm flex items-center gap-2">
+                  <span class="bg-rose-500 text-white w-5 h-5 rounded-full inline-flex items-center justify-center text-[10px] font-black shrink-0">6</span>
+                  Löse die Sachaufgabe. Schreibe Rechnung und Antwort.
+                </h4>
+                <span class="text-xs font-black text-slate-700 bg-slate-100 border border-slate-300 px-2 py-0.5 rounded-lg shrink-0">___ / 4 P.</span>
+              </div>
+              <p class="text-xs md:text-sm text-slate-800 mb-2 font-medium" id="t6-story"></p>
+              
+              <div class="space-y-3 text-xs flex-1 flex flex-col">
+                <div class="bg-rose-50/50 p-2 rounded-xl border border-rose-200">
+                  <span class="font-bold text-rose-950 block mb-2">a) Wie weit ist Familie Mohn nach den drei Tagen gefahren?</span>
+                  <div class="calc-row-single gap-2 w-full mono-font mb-3 overflow-x-auto">
+                    <span class="font-sans font-bold text-slate-600 mr-1 shrink-0">Rechnung:</span>
+                    <input type="text" id="t6a-calc" autocomplete="off" class="input-cell flex-1 min-w-[120px] px-2 h-10 text-base shrink-0">
+                    <span class="font-bold text-lg shrink-0">=</span>
+                    <input type="number" id="t6a-ans" autocomplete="off" class="input-cell w-24 h-10 text-base shrink-0">
+                    <span class="solution-hint hidden text-[10px] font-bold text-emerald-700 ml-1 shrink-0" id="sol-t6a-calc"></span>
+                  </div>
+                  <div class="w-full">
+                    <span class="font-bold text-slate-600 mb-1 block">Antwort:</span>
+                    <input type="text" id="t6a-antwort" autocomplete="off" class="w-full bg-white border border-slate-300 rounded-lg px-3 py-2 outline-none focus:border-rose-500 h-10 text-base">
+                  </div>
+                </div>
+
+                <div class="bg-rose-50/50 p-2 rounded-xl border border-rose-200 flex-1 flex flex-col">
+                  <span class="font-bold text-rose-950 block mb-2" id="t6b-quest"></span>
+                  <div class="calc-row-single gap-2 w-full mono-font mb-3 overflow-x-auto">
+                    <span class="font-sans font-bold text-slate-600 mr-1 shrink-0">Rechnung:</span>
+                    <input type="text" id="t6b-calc" autocomplete="off" class="input-cell flex-1 min-w-[120px] px-2 h-10 text-base shrink-0">
+                    <span class="font-bold text-lg shrink-0">=</span>
+                    <input type="number" id="t6b-ans" autocomplete="off" class="input-cell w-24 h-10 text-base shrink-0">
+                    <span class="solution-hint hidden text-[10px] font-bold text-emerald-700 ml-1 shrink-0" id="sol-t6b-calc"></span>
+                  </div>
+                  <div class="math-grid w-full rounded-lg overflow-hidden text-base font-bold flex-1 min-h-[72px]" id="t6-grid-container">
+                     <!-- Freiraum für schriftliche Nebenrechnung -->
+                  </div>
+                  <div class="w-full mt-3">
+                    <span class="font-bold text-slate-600 mb-1 block">Antwort:</span>
+                    <input type="text" id="t6b-antwort" autocomplete="off" class="w-full bg-white border border-slate-300 rounded-lg px-3 py-2 outline-none focus:border-rose-500 h-10 text-base">
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </section>
+        </div>
+        <div class="pt-2 border-t border-slate-200 flex justify-between items-center text-[10px] text-slate-400 font-bold">
+          <span>KGS Bad Münder • Mathematik 5 • 🤖 KI-generiert</span>
+          <span class="bg-slate-100 px-2 py-0.5 rounded-md text-slate-600">Seite 2 von 3</span>
+        </div>
+      </div>
+
+      <!-- ============================================================== -->
+      <!-- SEITE 3: EXPERTENSTANDARD (BROMBEERE 🫐)                       -->
+      <!-- ============================================================== -->
+      <div class="a4-page mt-6">
+        <div>
+          <div class="flex justify-between items-center border-b-2 border-purple-300 pb-1.5 mb-2.5">
+            <span class="text-xs font-black text-purple-950 heading-font">Check 1 • Seite 3 • Expertenstandard 🤖</span>
+            <span class="text-xs text-slate-700 font-bold">Name: <span class="header-name-mirror">______________________</span></span>
+          </div>
+
+          <section class="mb-2">
+            <div class="flex items-center gap-2.5 mb-2 bg-purple-50 border-l-4 border-purple-600 p-2 rounded-r-xl border border-purple-200">
+              <span class="inline-flex items-center gap-1.5 bg-white px-2 py-0.5 rounded-lg border border-purple-300 shadow-xs">
+                <img src="4%20Brombeere.png" alt="Brombeere" class="w-5 h-5 shrink-0 object-contain">
+                <span class="text-xs font-black text-purple-900">Expertenstandard</span>
+              </span>
+              <span class="text-sm font-bold text-amber-500">⭐⭐⭐⭐</span>
+            </div>
+
+            <p class="text-xs font-bold text-slate-500 uppercase tracking-wide mb-2">Ab hier kommen die Aufgaben, die für den Expertenstandard zusätzlich gelten:</p>
+
+            <!-- Aufgabe 7 -->
+            <div class="task-block mb-2.5 p-3 rounded-2xl bg-white border-2 border-purple-300 shadow-xs">
+              <div class="flex justify-between items-center mb-1.5">
+                <h4 class="font-black text-slate-900 text-sm flex items-center gap-2">
+                  <span class="bg-purple-600 text-white w-5 h-5 rounded-full inline-flex items-center justify-center text-[10px] font-black shrink-0">7</span>
+                  Berechne.
+                </h4>
+                <span class="text-xs font-black text-slate-700 bg-slate-100 border border-slate-300 px-2 py-0.5 rounded-lg shrink-0">___ / 2 P.</span>
+              </div>
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs md:text-sm mono-font font-bold">
+                <div class="bg-purple-50/50 p-2 rounded-xl border border-purple-200">
+                  <span class="font-bold text-purple-950 block mb-1" id="t7a-eq"></span>
+                  <div class="calc-row-single gap-1 w-full overflow-x-auto">
+                    <span class="shrink-0">=</span>
+                    <input type="text" id="t7a-weg" autocomplete="off" class="input-cell flex-1 min-w-[80px] px-1 shrink-0 border-purple-300">
+                    <span class="shrink-0">=</span>
+                    <input type="number" id="t7a-ans" autocomplete="off" class="input-cell input-cell-purple w-16 shrink-0">
+                  </div>
+                  <span class="solution-hint hidden text-[10px] font-bold text-emerald-700 block mt-1" id="sol-t7a"></span>
+                </div>
+                <div class="bg-purple-50/50 p-2 rounded-xl border border-purple-200">
+                  <span class="font-bold text-purple-950 block mb-1" id="t7b-eq"></span>
+                  <div class="calc-row-single gap-1 w-full overflow-x-auto">
+                    <span class="shrink-0">=</span>
+                    <input type="text" id="t7b-weg" autocomplete="off" class="input-cell flex-1 min-w-[80px] px-1 shrink-0 border-purple-300">
+                    <span class="shrink-0">=</span>
+                    <input type="number" id="t7b-ans" autocomplete="off" class="input-cell input-cell-purple w-16 shrink-0">
+                  </div>
+                  <span class="solution-hint hidden text-[10px] font-bold text-emerald-700 block mt-1" id="sol-t7b"></span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Aufgabe 8: Richtig oder Falsch -->
+            <div class="task-block mb-2.5 p-3 rounded-2xl bg-white border-2 border-purple-300 shadow-xs">
+              <div class="flex justify-between items-center mb-1.5">
+                <h4 class="font-black text-slate-900 text-sm flex items-center gap-2">
+                  <span class="bg-purple-600 text-white w-5 h-5 rounded-full inline-flex items-center justify-center text-[10px] font-black shrink-0">8</span>
+                  Richtig oder falsch? Begründe mit einem Satz.
+                </h4>
+                <span class="text-xs font-black text-slate-700 bg-slate-100 border border-slate-300 px-2 py-0.5 rounded-lg shrink-0">___ / 2 P.</span>
+              </div>
+              <div class="bg-slate-50 p-2 rounded-xl border border-slate-200 text-sm">
+                <div class="font-mono font-black text-purple-950 mb-2 text-center text-base" id="t8-eq"></div>
+                <div class="flex justify-center gap-6 mb-2">
+                  <label class="font-bold cursor-pointer text-emerald-700 bg-emerald-50 px-3 py-1 rounded-lg border border-emerald-200 hover:bg-emerald-100"><input type="radio" name="t8-radio" id="t8-true"> Richtig</label>
+                  <label class="font-bold cursor-pointer text-rose-700 bg-rose-50 px-3 py-1 rounded-lg border border-rose-200 hover:bg-rose-100"><input type="radio" name="t8-radio" id="t8-false"> Falsch</label>
+                </div>
+                <span class="font-bold text-slate-700 block mb-0.5 text-xs">Begründung:</span>
+                <textarea id="t8-reason" rows="1" autocomplete="off" class="w-full text-xs p-1.5 border border-slate-300 rounded focus:border-purple-500 outline-none"></textarea>
+                <span class="solution-hint hidden text-[10px] font-bold text-emerald-700 block mt-1" id="sol-t8"></span>
+              </div>
+            </div>
+
+            <!-- Aufgabe 9: Textaufgabe zu Termen -->
+            <div class="task-block mb-2 p-3 rounded-2xl bg-white border-2 border-purple-300 shadow-xs flex flex-col">
+              <div class="flex justify-between items-center mb-1.5">
+                <h4 class="font-black text-slate-900 text-sm flex items-center gap-2">
+                  <span class="bg-purple-600 text-white w-5 h-5 rounded-full inline-flex items-center justify-center text-[10px] font-black shrink-0">9</span>
+                  Schreibe die Aufgabe auf und löse sie.
+                </h4>
+                <span class="text-xs font-black text-slate-700 bg-slate-100 border border-slate-300 px-2 py-0.5 rounded-lg shrink-0">___ / 3 P.</span>
+              </div>
+              <p class="text-xs md:text-sm text-slate-800 mb-2 font-medium" id="t9-story"></p>
+              
+              <div class="bg-purple-50/50 p-2 rounded-xl border border-purple-200 flex-1 flex flex-col">
+                <div class="calc-row-single gap-1 w-full mono-font mb-2 overflow-x-auto">
+                  <span class="font-sans font-bold text-purple-900 mr-1 shrink-0">Rechnung:</span>
+                  <input type="text" id="t9-term" autocomplete="off" class="input-cell flex-1 min-w-[150px] px-1 shrink-0 border-purple-300">
+                  <span class="shrink-0">=</span>
+                  <input type="number" id="t9-ans" autocomplete="off" class="input-cell input-cell-purple w-20 shrink-0">
+                  <span class="solution-hint hidden text-[10px] font-bold text-emerald-700 ml-1 shrink-0" id="sol-t9"></span>
+                </div>
+                <div class="math-grid w-full rounded-lg overflow-hidden text-base font-bold flex-1 min-h-[144px]">
+                  <div id="t9-grid-default" class="w-full h-full flex flex-col text-slate-900"></div>
+                  <div id="t9-grid-solution" class="w-full flex-col hidden text-emerald-700"></div>
+                </div>
+              </div>
+            </div>
+
+          </section>
+
+          <!-- Rückmeldekasten -->
+          <div class="bg-slate-50 p-3 rounded-2xl border-2 border-slate-300 text-xs mt-auto">
+            <div class="font-extrabold text-slate-800 border-b border-slate-200 pb-1 mb-2 text-sm">Ergebnis (KGS Bad Münder):</div>
+            
+            <div class="flex flex-col gap-2">
+              <div class="flex flex-wrap items-center justify-between bg-rose-50 p-2 rounded-lg border border-rose-200">
+                <div class="flex items-center gap-2">
+                  <img src="3%20Kirsche.png" alt="Kirsche" class="w-4 h-4 shrink-0">
+                  <span class="font-black text-rose-900">Teil 1 (Erw. Standard)</span>
+                </div>
+                <div class="flex items-center gap-4">
+                  <div class="text-sm font-black text-rose-900">Punkte: <span id="display-score-t1">___</span> / 20</div>
+                  <div class="text-sm font-black text-emerald-800">Note: <span id="display-grade-t1">___</span></div>
+                </div>
+              </div>
+              
+              <div class="flex flex-wrap items-center justify-between bg-purple-50 p-2 rounded-lg border border-purple-200">
+                <div class="flex items-center gap-2">
+                  <img src="4%20Brombeere.png" alt="Brombeere" class="w-4 h-4 shrink-0">
+                  <span class="font-black text-purple-900">Gesamt (Teil 1 + 2)</span>
+                </div>
+                <div class="flex items-center gap-4">
+                  <div class="text-sm font-black text-purple-900">Punkte: <span id="display-score-total">___</span> / 29</div>
+                  <div class="text-sm font-black text-emerald-800">Note: <span id="display-grade-total">___</span></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+        <div class="pt-2 border-t border-slate-200 flex justify-between items-center text-[10px] text-slate-400 font-bold mt-2">
+          <span>KGS Bad Münder • Mathematik 5 • 🤖 KI-generiert</span>
+          <span class="bg-slate-100 px-2 py-0.5 rounded-md text-slate-600">Seite 3 von 3 • Ende</span>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <script>
+    let currentData = {};
+    let timerSeconds = 30 * 60;
+    let timerInterval = null;
+    let solutionsVisible = false;
+
+    function rand(min, max) {
+      return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
+
+    function cleanStr(str) { return str.replace(/\s+/g, '').replace(/,/g, '.').toLowerCase(); }
+
+    function renderGridRow(chars, ulIndex = -1, colorClass = '') {
+      let html = '<div class="calc-row-single" style="height: 36px;">';
+      for (let j = 0; j < chars.length; j++) {
+        let char = chars[j];
+        let border = (ulIndex !== -1 && j >= ulIndex) ? 'border-bottom: 2px solid currentColor;' : '';
+        let cClass = colorClass;
+        if (char === ' ') html += `<span style="display: inline-block; width: 36px; ${border}"></span>`;
+        else html += `<span class="${cClass}" style="display: inline-block; width: 36px; text-align: center; ${border}">${char}</span>`;
+      }
+      html += '</div>';
+      return html;
+    }
+
+    function renderAdditionSolution(operands) {
+      let rowsHTML = [];
+      let maxLen = 0;
+      let sum = 0;
+      operands.forEach(op => { sum += op; if(op.toString().length > maxLen) maxLen = op.toString().length; });
+      let sumStr = sum.toString();
+      if(sumStr.length > maxLen) maxLen = sumStr.length;
+      maxLen += 1;
+
+      operands.forEach((op, index) => {
+        let str = op.toString();
+        let pad = maxLen - str.length;
+        let arr = Array(pad).fill(' ').concat(str.split(''));
+        if(index > 0) arr[0] = '+';
+        let isLast = index === operands.length - 1;
+        rowsHTML.push(renderGridRow(arr, isLast ? 1 : -1, 'text-emerald-700'));
+      });
+      
+      let sPad = maxLen - sumStr.length;
+      let sArr = Array(sPad).fill(' ').concat(sumStr.split(''));
+      rowsHTML.push(renderGridRow(sArr, -1, 'text-emerald-700'));
+
+      return rowsHTML.join('');
+    }
+
+    function generateNewProblems() {
+      // Garantierte Vermeidung von negativen Zahlen!
+      // T1 (Text zu Mathe)
+      const t1_1a = rand(100, 200); const t1_1b = rand(20, 80);
+      const t1_2a = rand(100, 200); const t1_2b = rand(20, t1_2a-10); // Diff
+      const t1_3a = rand(50, 150); const t1_3b = rand(20, 80);
+      const t1_4a = rand(100, 200); const t1_4b = rand(20, t1_4a-10);
+
+      // T2 (Add/Sub Ketten)
+      const t2_a1 = rand(10, 30); const t2_a2 = rand(10, 30); const t2_a3 = rand(10, 30);
+      const t2_b1 = rand(60, 99); const t2_b2 = rand(5, 20); const t2_b3 = rand(5, 20); // b1 > b2+b3 guaranteed
+      const t2_c1 = rand(20, 50); const t2_c2 = rand(5, t2_c1-5); const t2_c3 = rand(5, 20);
+      const t2_d1 = rand(100, 300); const t2_d2 = rand(10, 50); const t2_d3 = rand(10, t2_d1+t2_d2-10);
+
+      // T3 (Klammern)
+      const t3_a1 = rand(20, 50); const t3_a2 = rand(10, 30); const t3_a3 = rand(10, 30);
+      const t3_b1 = rand(20, 50); const t3_b2 = rand(20, 40); const t3_b3 = rand(5, t3_b2-5);
+      const t3_c2 = rand(10, 25); const t3_c3 = rand(10, 25); const t3_c1 = rand(t3_c2+t3_c3+10, 99);
+      const t3_d2 = rand(20, 40); const t3_d3 = rand(5, t3_d2-5); const t3_d1 = rand(t3_d2-t3_d3+10, 99);
+
+      // T4 (Klammern setzen)
+      // Eq1: A + B - C + D = (A+B) - (C+D). (C+D) < (A+B)
+      const t4_c = rand(10, 30); const t4_d = rand(5, 15); const subSum = t4_c + t4_d;
+      const t4_a = rand(subSum, subSum+50); const t4_b = rand(20, 50);
+      const t4_ans1 = (t4_a + t4_b) - (t4_c + t4_d);
+      const t4_eq1_str = `${t4_a} + ${t4_b} - ${t4_c} + ${t4_d} = ${t4_ans1}`;
+      const t4_sol1 = `${t4_a}+${t4_b}-(${t4_c}+${t4_d})=${t4_ans1}`; // Alternate logic could exist, but we check rigidly without spaces
+
+      // Eq2: A - B - B - B + C = A - (B-B) - B + C
+      const t4_2a = rand(10, 20); const t4_2b = rand(2, 5); const t4_2c = rand(2, 5);
+      const t4_ans2 = t4_2a - (t4_2b - t4_2b) - t4_2b + t4_2c;
+      const t4_eq2_str = `${t4_2a} - ${t4_2b} - ${t4_2b} - ${t4_2b} + ${t4_2c} = ${t4_ans2}`;
+      const t4_sol2 = `${t4_2a}-(${t4_2b}-${t4_2b})-${t4_2b}+${t4_2c}=${t4_ans2}`;
+
+      // T5 (Vorteilhaft)
+      const t5_a1 = rand(2, 5)*10 + rand(1, 9); const t5_a3 = (Math.ceil(t5_a1/10)*10) - t5_a1; 
+      const t5_a1_adj = t5_a1; const t5_a3_adj = t5_a3 + rand(1,4)*10; // make them round up
+      const t5_a2 = rand(20, 60);
+
+      const t5_b1 = rand(1, 8)*100 + rand(1, 9)*10; const t5_b3 = (Math.ceil(t5_b1/100)*100) - t5_b1 + rand(1,3)*100;
+      const t5_b2 = rand(1, 5)*100 + rand(1, 9)*10; const t5_b4 = (Math.ceil(t5_b2/100)*100) - t5_b2 + rand(1,3)*100;
+
+      // T6 (Sachaufgabe)
+      const t6_d1 = rand(30, 60); const t6_d2 = rand(30, 60); const t6_d3 = rand(30, 60);
+      const t6_sum = t6_d1 + t6_d2 + t6_d3;
+      const t6_target = t6_sum + rand(50, 150);
+
+      // T7 (Experte - Klammern)
+      const t7_a2 = rand(50, 90); const t7_a3 = rand(10, t7_a2-10);
+      const t7_a1 = rand(t7_a2-t7_a3+10, 150);
+      const t7_b1 = rand(20, 60); const t7_b2 = rand(20, 60);
+      const t7_b3 = rand(20, 60); const t7_b4 = rand(10, t7_b3-10); // Guaranteed positive
+
+      // T8 (Richtig/Falsch Assoziativgesetz Addition)
+      const t8_a = rand(50, 99); const t8_b = rand(20, 50); const t8_c = rand(10, 30);
+
+      // T9 (Experte - Text zu Term)
+      const t9_a = rand(10, 40); const t9_b = rand(5, 20);
+      const t9_c = rand(50, 99); const t9_d = rand(10, t9_c-10);
+
+      return {
+        t1: {
+          t1: `Der erste Summand ist ${t1_1a}, der zweite Summand ist ${t1_1b}.`, e1: `${t1_1a} + ${t1_1b} =`, a1: t1_1a+t1_1b,
+          t2: `Die Differenz aus ${t1_2a} und ${t1_2b}.`, e2: `${t1_2a} - ${t1_2b} =`, a2: t1_2a-t1_2b,
+          t3: `Die Summe aus ${t1_3a} und ${t1_3b}.`, e3: `${t1_3a} + ${t1_3b} =`, a3: t1_3a+t1_3b,
+          t4: `Der Minuend ist ${t1_4a} und der Subtrahend ist ${t1_4b}.`, e4: `${t1_4a} - ${t1_4b} =`, a4: t1_4a-t1_4b
+        },
+        t2: {
+          e1: `a) ${t2_a1} + ${t2_a2} + ${t2_a3} =`, a1: t2_a1+t2_a2+t2_a3,
+          e2: `b) ${t2_b1} - ${t2_b2} - ${t2_b3} =`, a2: t2_b1-t2_b2-t2_b3,
+          e3: `c) ${t2_c1} - ${t2_c2} + ${t2_c3} =`, a3: t2_c1-t2_c2+t2_c3,
+          e4: `d) ${t2_d1} + ${t2_d2} - ${t2_d3} =`, a4: t2_d1+t2_d2-t2_d3
+        },
+        t3: {
+          e1: `a) ${t3_a1} + (${t3_a2} + ${t3_a3}) =`, a1: t3_a1 + (t3_a2+t3_a3),
+          e2: `b) ${t3_b1} + (${t3_b2} - ${t3_b3}) =`, a2: t3_b1 + (t3_b2-t3_b3),
+          e3: `c) ${t3_c1} - (${t3_c2} + ${t3_c3}) =`, a3: t3_c1 - (t3_c2+t3_c3),
+          e4: `d) ${t3_d1} - (${t3_d2} - ${t3_d3}) =`, a4: t3_d1 - (t3_d2-t3_d3)
+        },
+        t4: {
+          eq1: t4_eq1_str, sol1: t4_sol1,
+          eq2: t4_eq2_str, sol2: t4_sol2
+        },
+        t5: {
+          e1: `a) ${t5_a1_adj} + ${t5_a2} + ${t5_a3_adj} =`, a1: t5_a1_adj+t5_a2+t5_a3_adj,
+          e2: `b) ${t5_b1} + ${t5_b2} + ${t5_b3} + ${t5_b4} =`, a2: t5_b1+t5_b2+t5_b3+t5_b4
+        },
+        t6: { d1: t6_d1, d2: t6_d2, d3: t6_d3, sum: t6_sum, target: t6_target, diff: t6_target - t6_sum },
+        t7: {
+          e1: `a) ${t7_a1} - (${t7_a2} - ${t7_a3})`, a1: t7_a1 - (t7_a2-t7_a3),
+          e2: `b) (${t7_b1} + ${t7_b2}) - (${t7_b3} - ${t7_b4})`, a2: (t7_b1+t7_b2) - (t7_b3-t7_b4)
+        },
+        t8: { eq: `(${t8_a} + ${t8_b}) + ${t8_c} = ${t8_a} + (${t8_b} + ${t8_c})`, true: true },
+        t9: { a: t9_a, b: t9_b, c: t9_c, d: t9_d, eqStr: `(${t9_a}+${t9_b})+(${t9_c}-${t9_d})`, ans: (t9_a+t9_b)+(t9_c-t9_d) }
+      };
+    }
+
+    function renderTasks() {
+      const d = currentData;
+      
+      // T1
+      document.getElementById('t1-txt1').textContent = d.t1.t1; document.getElementById('sol-t1-1').textContent = `(${d.t1.e1} ${d.t1.a1})`;
+      document.getElementById('t1-txt2').textContent = d.t1.t2; document.getElementById('sol-t1-2').textContent = `(${d.t1.e2} ${d.t1.a2})`;
+      document.getElementById('t1-txt3').textContent = d.t1.t3; document.getElementById('sol-t1-3').textContent = `(${d.t1.e3} ${d.t1.a3})`;
+      document.getElementById('t1-txt4').textContent = d.t1.t4; document.getElementById('sol-t1-4').textContent = `(${d.t1.e4} ${d.t1.a4})`;
+
+      // T2
+      document.getElementById('t2-eq1').textContent = d.t2.e1; document.getElementById('sol-t2-1').textContent = `(${d.t2.a1})`;
+      document.getElementById('t2-eq2').textContent = d.t2.e2; document.getElementById('sol-t2-2').textContent = `(${d.t2.a2})`;
+      document.getElementById('t2-eq3').textContent = d.t2.e3; document.getElementById('sol-t2-3').textContent = `(${d.t2.a3})`;
+      document.getElementById('t2-eq4').textContent = d.t2.e4; document.getElementById('sol-t2-4').textContent = `(${d.t2.a4})`;
+
+      // T3
+      document.getElementById('t3-eq1').textContent = d.t3.e1; document.getElementById('sol-t3-1').textContent = `(${d.t3.a1})`;
+      document.getElementById('t3-eq2').textContent = d.t3.e2; document.getElementById('sol-t3-2').textContent = `(${d.t3.a2})`;
+      document.getElementById('t3-eq3').textContent = d.t3.e3; document.getElementById('sol-t3-3').textContent = `(${d.t3.a3})`;
+      document.getElementById('t3-eq4').textContent = d.t3.e4; document.getElementById('sol-t3-4').textContent = `(${d.t3.a4})`;
+
+      // T4
+      document.getElementById('t4-eq1').textContent = `a) ${d.t4.eq1}`; document.getElementById('sol-t4-1').textContent = `(Z.B. ${d.t4.sol1})`;
+      document.getElementById('t4-eq2').textContent = `b) ${d.t4.eq2}`; document.getElementById('sol-t4-2').textContent = `(Z.B. ${d.t4.sol2})`;
+
+      // T5
+      document.getElementById('t5-eq1').textContent = d.t5.e1; document.getElementById('sol-t5-1').textContent = `(Z.B. = ${d.t5.a1})`;
+      document.getElementById('t5-eq2').textContent = d.t5.e2; document.getElementById('sol-t5-2').textContent = `(Z.B. = ${d.t5.a2})`;
+
+      // T6
+      document.getElementById('t6-story').textContent = `Familie Mohn macht eine Radtour. Am ersten Tag fährt sie ${d.t6.d1} km, am zweiten Tag ${d.t6.d2} km und am dritten Tag ${d.t6.d3} km.`;
+      document.getElementById('sol-t6a-calc').textContent = `(${d.t6.d1} + ${d.t6.d2} + ${d.t6.d3} = ${d.t6.sum})`;
+      document.getElementById('t6b-quest').textContent = `b) Ihr Ziel werden sie nach ${d.t6.target} km erreichen. Wie viel Kilometer müssen sie am 4. Tag noch fahren?`;
+      document.getElementById('sol-t6b-calc').textContent = `(${d.t6.target} - ${d.t6.sum} = ${d.t6.diff})`;
+
+      // T7
+      document.getElementById('t7a-eq').textContent = d.t7.e1; document.getElementById('sol-t7a').textContent = `(${d.t7.a1})`;
+      document.getElementById('t7b-eq').textContent = d.t7.e2; document.getElementById('sol-t7b').textContent = `(${d.t7.a2})`;
+
+      // T8
+      document.getElementById('t8-eq').textContent = d.t8.eq;
+      document.getElementById('sol-t8').textContent = `(Richtig, Assoziativgesetz der Addition)`;
+
+      // T9
+      document.getElementById('t9-story').textContent = `Addiere zur Summe der Zahlen ${d.t9.a} und ${d.t9.b} die Differenz von ${d.t9.c} und ${d.t9.d}.`;
+      document.getElementById('sol-t9').textContent = `(${d.t9.eqStr} = ${d.t9.ans})`;
+      
+      let t9SolGridHTML = renderAdditionSolution([d.t9.a+d.t9.b, d.t9.c-d.t9.d]);
+      document.getElementById('t9-grid-solution').innerHTML = t9SolGridHTML;
+
+      clearAllInputs();
+    }
+
+    function clearAllInputs() {
+      document.querySelectorAll('input[type="number"], input[type="text"]:not(#student-name):not(#student-class):not(#test-date), textarea').forEach(inp => {
+        inp.value = '';
+        inp.classList.remove('bg-emerald-100', 'bg-rose-100', 'border-emerald-500', 'border-rose-500', 'border-purple-500');
+      });
+      document.querySelectorAll('input[type="radio"]').forEach(r => r.checked = false);
+      document.getElementById('display-score-user').textContent = '___';
+      document.getElementById('display-grade-user').textContent = '___';
+      document.getElementById('chk-e-reached').checked = false;
+      document.getElementById('chk-z-reached').checked = false;
+    }
+
+    // ==============================================================
+    // TIMER & MODAL
+    // ==============================================================
+    function updateTimerDisplay() {
+      const min = Math.floor(timerSeconds / 60);
+      const sec = timerSeconds % 60;
+      const display = document.getElementById('timer-display');
+      display.textContent = `${String(min).padStart(2, '0')}:${String(sec).padStart(2, '0')}`;
+      if (timerSeconds <= 300 && timerSeconds > 0) display.classList.add('text-rose-600', 'animate-pulse');
+      else if (timerSeconds === 0) {
+        display.classList.remove('text-rose-700', 'animate-pulse');
+        display.classList.add('text-rose-900');
+        stopTimer();
+      }
+    }
+    function toggleTimer() { timerInterval ? stopTimer() : startTimer(); }
+    function startTimer() {
+      if (timerSeconds <= 0) timerSeconds = 30 * 60;
+      timerInterval = setInterval(() => { timerSeconds--; updateTimerDisplay(); }, 1000);
+      document.getElementById('timer-play-icon').classList.add('hidden');
+      document.getElementById('timer-pause-icon').classList.remove('hidden');
+    }
+    function stopTimer() {
+      clearInterval(timerInterval); timerInterval = null;
+      document.getElementById('timer-play-icon').classList.remove('hidden');
+      document.getElementById('timer-pause-icon').classList.add('hidden');
+    }
+    function resetTimer() {
+      stopTimer(); timerSeconds = 30 * 60;
+      document.getElementById('timer-display').classList.remove('text-rose-600', 'animate-pulse');
+      updateTimerDisplay();
+    }
+    function showModal(title, text, icon = '💡') {
+      document.getElementById('modal-icon').textContent = icon;
+      document.getElementById('modal-title').textContent = title;
+      document.getElementById('modal-body').textContent = text;
+      document.getElementById('custom-modal').classList.remove('hidden');
+    }
+    function closeModal() { document.getElementById('custom-modal').classList.add('hidden'); }
+    
+    function toggleSolutions() {
+      solutionsVisible = !solutionsVisible;
+      document.querySelectorAll('.solution-hint').forEach(h => solutionsVisible ? h.classList.remove('hidden') : h.classList.add('hidden'));
+      
+      const defaults = document.querySelectorAll('[id$="-grid-default"]');
+      const solutions = document.querySelectorAll('[id$="-grid-solution"]');
+
+      if (solutionsVisible) {
+        defaults.forEach(d => d.classList.add('hidden'));
+        solutions.forEach(s => { s.classList.remove('hidden'); s.classList.add('flex'); });
+        document.getElementById('btn-toggle-solutions').innerHTML = '<span>🙈</span> Musterlösung verbergen';
+      } else {
+        defaults.forEach(d => d.classList.remove('hidden'));
+        solutions.forEach(s => { s.classList.add('hidden'); s.classList.remove('flex'); });
+        document.getElementById('btn-toggle-solutions').innerHTML = '<span>👁️</span> Musterlösung einblenden';
+      }
+    }
+
+    function regenerateTasks() {
+      currentData = generateNewProblems();
+      renderTasks();
+      resetTimer();
+    }
+
+    // ==============================================================
+    // AUSWERTUNG
+    // ==============================================================
+    function markInput(id, isCorrect) {
+      const el = document.getElementById(id);
+      if (!el) return;
+      if (isCorrect) {
+        el.classList.add('bg-emerald-100', 'border-emerald-500');
+        el.classList.remove('bg-rose-100', 'border-rose-500', 'border-purple-500');
+      } else {
+        el.classList.add('bg-rose-100', 'border-rose-500');
+        el.classList.remove('bg-emerald-100', 'border-emerald-500');
+      }
+    }
+
+    function evaluateTest() {
+      let scoreT1 = 0;
+      let scoreT2 = 0;
+      const d = currentData;
+
+      // T1 (4P - je 0.5 für Term und 0.5 für Ergebnis)
+      let checkEq = (id, op) => {
+        let val = cleanStr(document.getElementById(id).value);
+        if(val.includes(op)) { scoreT1+=0.5; markInput(id, true); } else markInput(id, false);
+      }
+      checkEq('t1-eq1-input', '+');
+      if(parseInt(document.getElementById('t1-ans1').value,10) === d.t1.a1) { scoreT1+=0.5; markInput('t1-ans1', true); } else markInput('t1-ans1', false);
+
+      checkEq('t1-eq2-input', '-');
+      if(parseInt(document.getElementById('t1-ans2').value,10) === d.t1.a2) { scoreT1+=0.5; markInput('t1-ans2', true); } else markInput('t1-ans2', false);
+
+      checkEq('t1-eq3-input', '+');
+      if(parseInt(document.getElementById('t1-ans3').value,10) === d.t1.a3) { scoreT1+=0.5; markInput('t1-ans3', true); } else markInput('t1-ans3', false);
+
+      checkEq('t1-eq4-input', '-');
+      if(parseInt(document.getElementById('t1-ans4').value,10) === d.t1.a4) { scoreT1+=0.5; markInput('t1-ans4', true); } else markInput('t1-ans4', false);
+
+      // T2 (4P - je 1P)
+      if(parseInt(document.getElementById('t2-ans1').value,10) === d.t2.a1) { scoreT1+=1; markInput('t2-ans1', true); } else markInput('t2-ans1', false);
+      if(parseInt(document.getElementById('t2-ans2').value,10) === d.t2.a2) { scoreT1+=1; markInput('t2-ans2', true); } else markInput('t2-ans2', false);
+      if(parseInt(document.getElementById('t2-ans3').value,10) === d.t2.a3) { scoreT1+=1; markInput('t2-ans3', true); } else markInput('t2-ans3', false);
+      if(parseInt(document.getElementById('t2-ans4').value,10) === d.t2.a4) { scoreT1+=1; markInput('t2-ans4', true); } else markInput('t2-ans4', false);
+
+      // T3 (4P - je 1P)
+      if(parseInt(document.getElementById('t3-ans1').value,10) === d.t3.a1) { scoreT1+=1; markInput('t3-ans1', true); } else markInput('t3-ans1', false);
+      if(parseInt(document.getElementById('t3-ans2').value,10) === d.t3.a2) { scoreT1+=1; markInput('t3-ans2', true); } else markInput('t3-ans2', false);
+      if(parseInt(document.getElementById('t3-ans3').value,10) === d.t3.a3) { scoreT1+=1; markInput('t3-ans3', true); } else markInput('t3-ans3', false);
+      if(parseInt(document.getElementById('t3-ans4').value,10) === d.t3.a4) { scoreT1+=1; markInput('t3-ans4', true); } else markInput('t3-ans4', false);
+
+      // T4 (2P)
+      let t4a1 = cleanStr(document.getElementById('t4-ans1').value);
+      if(t4a1 === cleanStr(d.t4.sol1)) { scoreT1+=1; markInput('t4-ans1', true); } else markInput('t4-ans1', false);
+      let t4a2 = cleanStr(document.getElementById('t4-ans2').value);
+      if(t4a2 === cleanStr(d.t4.sol2) || t4a2.includes(')')) { scoreT1+=1; markInput('t4-ans2', true); } else markInput('t4-ans2', false); 
+
+      // T5 (2P)
+      let t5s1 = cleanStr(document.getElementById('t5-step1').value);
+      if(t5s1.length > 0) { scoreT1+=0.5; markInput('t5-step1', true); } else markInput('t5-step1', false);
+      if(parseInt(document.getElementById('t5-ans1').value,10) === d.t5.a1) { scoreT1+=0.5; markInput('t5-ans1', true); } else markInput('t5-ans1', false);
+
+      let t5s2 = cleanStr(document.getElementById('t5-step2').value);
+      if(t5s2.length > 0) { scoreT1+=0.5; markInput('t5-step2', true); } else markInput('t5-step2', false);
+      if(parseInt(document.getElementById('t5-ans2').value,10) === d.t5.a2) { scoreT1+=0.5; markInput('t5-ans2', true); } else markInput('t5-ans2', false);
+
+      // T6 (4P)
+      let t6c1 = cleanStr(document.getElementById('t6a-calc').value);
+      if(t6c1.includes('+')) { scoreT1+=0.5; markInput('t6a-calc', true); } else markInput('t6a-calc', false);
+      if(parseInt(document.getElementById('t6a-ans').value,10) === d.t6.sum) { scoreT1+=0.5; markInput('t6a-ans', true); } else markInput('t6a-ans', false);
+      if(document.getElementById('t6a-antwort').value.trim().length > 5) { scoreT1+=1; markInput('t6a-antwort', true); } else markInput('t6a-antwort', false);
+
+      let t6c2 = cleanStr(document.getElementById('t6b-calc').value);
+      if(t6c2.includes('-')) { scoreT1+=0.5; markInput('t6b-calc', true); } else markInput('t6b-calc', false);
+      if(parseInt(document.getElementById('t6b-ans').value,10) === d.t6.diff) { scoreT1+=0.5; markInput('t6b-ans', true); } else markInput('t6b-ans', false);
+      if(document.getElementById('t6b-antwort').value.trim().length > 5) { scoreT1+=1; markInput('t6b-antwort', true); } else markInput('t6b-antwort', false);
+
+      // T7 (4P - je 2P)
+      let t7w1 = cleanStr(document.getElementById('t7a-weg').value);
+      if(t7w1.length > 2) { scoreT2+=1; markInput('t7a-weg', true); } else markInput('t7a-weg', false);
+      if(parseInt(document.getElementById('t7a-ans').value,10) === d.t7.a1) { scoreT2+=1; markInput('t7a-ans', true); } else markInput('t7a-ans', false);
+      
+      let t7w2 = cleanStr(document.getElementById('t7b-weg').value);
+      if(t7w2.length > 2) { scoreT2+=1; markInput('t7b-weg', true); } else markInput('t7b-weg', false);
+      if(parseInt(document.getElementById('t7b-ans').value,10) === d.t7.a2) { scoreT2+=1; markInput('t7b-ans', true); } else markInput('t7b-ans', false);
+
+      // T8 (2P)
+      if(document.getElementById('t8-true').checked) scoreT2+=1;
+      if(document.getElementById('t8-reason').value.trim().length > 5) { scoreT2+=1; markInput('t8-reason', true); } else markInput('t8-reason', false);
+
+      // T9 (3P)
+      let t9t = cleanStr(document.getElementById('t9-term').value);
+      if(t9t.includes('+') && t9t.includes('-') && t9t.includes(')')) { scoreT2+=1.5; markInput('t9-term', true); } else markInput('t9-term', false);
+      if(parseInt(document.getElementById('t9-ans').value,10) === d.t9.ans) { scoreT2+=1.5; markInput('t9-ans', true); } else markInput('t9-ans', false);
+
+      // Notenberechnung
+      let totalScore = scoreT1 + scoreT2;
+      
+      let getNote = (pts, max) => {
+        let p = pts/max;
+        if(p >= 0.88) return '1 (Sehr gut)';
+        if(p >= 0.74) return '2 (Gut)';
+        if(p >= 0.60) return '3 (Befriedigend)';
+        if(p >= 0.45) return '4 (Ausreichend)';
+        if(p >= 0.20) return '5 (Mangelhaft)';
+        return '6 (Ungenügend)';
+      }
+      
+      let noteT1 = getNote(scoreT1, 20);
+      let noteTotal = getNote(totalScore, 29);
+      
+      document.getElementById('display-score-t1').textContent = scoreT1;
+      document.getElementById('display-grade-t1').textContent = noteT1;
+      
+      document.getElementById('display-score-total').textContent = totalScore;
+      document.getElementById('display-grade-total').textContent = noteTotal;
+
+      showModal(`Auswertung erfolgreich!`, `Du hast im Erweiterten Standard (Kirsche) ${scoreT1} Punkte und im Expertenstandard (Brombeere) ${scoreT2} Punkte erreicht.`, totalScore >= 23 ? '🫐' : '🍒');
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      regenerateTasks();
+      document.getElementById('student-name').addEventListener('input', (e) => {
+        document.querySelectorAll('.header-name-mirror').forEach(m => m.textContent = e.target.value || '______________________');
+      });
+    });
+  </script>
+</body>
+</html>
