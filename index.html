@@ -1017,7 +1017,7 @@
       if(parseInt(document.getElementById('t6b-ans').value,10) === d.t6.diff) { scoreT1+=0.5; markInput('t6b-ans', true); } else markInput('t6b-ans', false);
       if(document.getElementById('t6b-antwort').value.trim().length > 5) { scoreT1+=1; markInput('t6b-antwort', true); } else markInput('t6b-antwort', false);
 
-      // T7 (4P - je 2P)
+      // T7 (4P)
       let t7w1 = cleanStr(document.getElementById('t7a-weg').value);
       if(t7w1.length > 2) { scoreT2+=1; markInput('t7a-weg', true); } else markInput('t7a-weg', false);
       if(parseInt(document.getElementById('t7a-ans').value,10) === d.t7.a1) { scoreT2+=1; markInput('t7a-ans', true); } else markInput('t7a-ans', false);
