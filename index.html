@@ -294,38 +294,38 @@
                 <div class="bg-slate-50 p-2.5 rounded-xl border border-slate-200 flex flex-col justify-between">
                   <span id="t1-txt1" class="mb-3 font-bold text-pretty leading-tight" style="word-break: keep-all;"></span>
                   <div class="calc-row-single gap-2 mt-auto w-full">
-                    <span id="t1-eq1" class="font-mono text-base font-bold text-slate-900 shrink-0"></span>
+                    <input type="text" id="t1-calc1" autocomplete="off" class="input-cell flex-1 min-w-[80px] shrink-0 h-10 text-base font-mono border-slate-400 px-2 text-left">
                     <span class="font-bold text-lg shrink-0">=</span>
                     <input type="number" id="t1-ans1" autocomplete="off" class="input-cell w-20 shrink-0 h-10 text-base font-mono border-slate-400">
-                    <span class="solution-hint hidden text-[10px] font-bold text-emerald-700 ml-1 shrink-0" id="sol-t1-1"></span>
                   </div>
+                  <span class="solution-hint hidden text-[10px] font-bold text-emerald-700 mt-1 shrink-0" id="sol-t1-1"></span>
                 </div>
                 <div class="bg-slate-50 p-2.5 rounded-xl border border-slate-200 flex flex-col justify-between">
                   <span id="t1-txt2" class="mb-3 font-bold text-pretty leading-tight" style="word-break: keep-all;"></span>
                   <div class="calc-row-single gap-2 mt-auto w-full">
-                    <span id="t1-eq2" class="font-mono text-base font-bold text-slate-900 shrink-0"></span>
+                    <input type="text" id="t1-calc2" autocomplete="off" class="input-cell flex-1 min-w-[80px] shrink-0 h-10 text-base font-mono border-slate-400 px-2 text-left">
                     <span class="font-bold text-lg shrink-0">=</span>
                     <input type="number" id="t1-ans2" autocomplete="off" class="input-cell w-20 shrink-0 h-10 text-base font-mono border-slate-400">
-                    <span class="solution-hint hidden text-[10px] font-bold text-emerald-700 ml-1 shrink-0" id="sol-t1-2"></span>
                   </div>
+                  <span class="solution-hint hidden text-[10px] font-bold text-emerald-700 mt-1 shrink-0" id="sol-t1-2"></span>
                 </div>
                 <div class="bg-slate-50 p-2.5 rounded-xl border border-slate-200 flex flex-col justify-between">
                   <span id="t1-txt3" class="mb-3 font-bold text-pretty leading-tight" style="word-break: keep-all;"></span>
                   <div class="calc-row-single gap-2 mt-auto w-full">
-                    <span id="t1-eq3" class="font-mono text-base font-bold text-slate-900 shrink-0"></span>
+                    <input type="text" id="t1-calc3" autocomplete="off" class="input-cell flex-1 min-w-[80px] shrink-0 h-10 text-base font-mono border-slate-400 px-2 text-left">
                     <span class="font-bold text-lg shrink-0">=</span>
                     <input type="number" id="t1-ans3" autocomplete="off" class="input-cell w-20 shrink-0 h-10 text-base font-mono border-slate-400">
-                    <span class="solution-hint hidden text-[10px] font-bold text-emerald-700 ml-1 shrink-0" id="sol-t1-3"></span>
                   </div>
+                  <span class="solution-hint hidden text-[10px] font-bold text-emerald-700 mt-1 shrink-0" id="sol-t1-3"></span>
                 </div>
                 <div class="bg-slate-50 p-2.5 rounded-xl border border-slate-200 flex flex-col justify-between">
                   <span id="t1-txt4" class="mb-3 font-bold text-pretty leading-tight" style="word-break: keep-all;"></span>
                   <div class="calc-row-single gap-2 mt-auto w-full">
-                    <span id="t1-eq4" class="font-mono text-base font-bold text-slate-900 shrink-0"></span>
+                    <input type="text" id="t1-calc4" autocomplete="off" class="input-cell flex-1 min-w-[80px] shrink-0 h-10 text-base font-mono border-slate-400 px-2 text-left">
                     <span class="font-bold text-lg shrink-0">=</span>
                     <input type="number" id="t1-ans4" autocomplete="off" class="input-cell w-20 shrink-0 h-10 text-base font-mono border-slate-400">
-                    <span class="solution-hint hidden text-[10px] font-bold text-emerald-700 ml-1 shrink-0" id="sol-t1-4"></span>
                   </div>
+                  <span class="solution-hint hidden text-[10px] font-bold text-emerald-700 mt-1 shrink-0" id="sol-t1-4"></span>
                 </div>
               </div>
             </div>
@@ -819,20 +819,16 @@
       
       // T1
       document.getElementById('t1-txt1').textContent = d.t1.t1;
-      document.getElementById('t1-eq1').textContent = d.t1.e1;
-      document.getElementById('sol-t1-1').textContent = `(${d.t1.a1})`;
+      document.getElementById('sol-t1-1').textContent = `(${d.t1.e1} = ${d.t1.a1})`;
       
       document.getElementById('t1-txt2').textContent = d.t1.t2;
-      document.getElementById('t1-eq2').textContent = d.t1.e2;
-      document.getElementById('sol-t1-2').textContent = `(${d.t1.a2})`;
+      document.getElementById('sol-t1-2').textContent = `(${d.t1.e2} = ${d.t1.a2})`;
       
       document.getElementById('t1-txt3').textContent = d.t1.t3;
-      document.getElementById('t1-eq3').textContent = d.t1.e3;
-      document.getElementById('sol-t1-3').textContent = `(${d.t1.a3})`;
+      document.getElementById('sol-t1-3').textContent = `(${d.t1.e3} = ${d.t1.a3})`;
       
       document.getElementById('t1-txt4').textContent = d.t1.t4;
-      document.getElementById('t1-eq4').textContent = d.t1.e4;
-      document.getElementById('sol-t1-4').textContent = `(${d.t1.a4})`;
+      document.getElementById('sol-t1-4').textContent = `(${d.t1.e4} = ${d.t1.a4})`;
 
       // T2
       document.getElementById('t2-eq1').textContent = d.t2.e1; document.getElementById('sol-t2-1').textContent = `(${d.t2.a1})`;
@@ -980,19 +976,28 @@
       let scoreT2 = 0;
       const d = currentData;
 
-      // T1 (4P - je 1P)
-      let checkT1 = (idAns, expAns) => {
+      // T1 (4P - je 1P: 0.5 für Rechnung, 0.5 für Ergebnis)
+      let checkT1 = (idCalc, idAns, expAns) => {
+          let calcStr = cleanStr(document.getElementById(idCalc).value);
+          let isCalcValid = calcStr.includes('+') || calcStr.includes('-');
+          
+          if (isCalcValid) { 
+              scoreT1 += 0.5; markInput(idCalc, true); 
+          } else { 
+              markInput(idCalc, false); 
+          }
+          
           if (parseInt(document.getElementById(idAns).value, 10) === expAns) {
-              scoreT1 += 1; markInput(idAns, true);
+              scoreT1 += 0.5; markInput(idAns, true);
           } else {
               markInput(idAns, false);
           }
       };
 
-      checkT1('t1-ans1', d.t1.a1);
-      checkT1('t1-ans2', d.t1.a2);
-      checkT1('t1-ans3', d.t1.a3);
-      checkT1('t1-ans4', d.t1.a4);
+      checkT1('t1-calc1', 't1-ans1', d.t1.a1);
+      checkT1('t1-calc2', 't1-ans2', d.t1.a2);
+      checkT1('t1-calc3', 't1-ans3', d.t1.a3);
+      checkT1('t1-calc4', 't1-ans4', d.t1.a4);
 
       // T2 (4P - je 1P)
       if(parseInt(document.getElementById('t2-ans1').value,10) === d.t2.a1) { scoreT1+=1; markInput('t2-ans1', true); } else markInput('t2-ans1', false);
